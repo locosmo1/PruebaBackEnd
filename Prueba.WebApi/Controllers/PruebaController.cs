@@ -1,13 +1,13 @@
 ﻿
 
+using Prueba.Datos;
 using Prueba.Entidad;
+using Prueba.Logica;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using System;
-using Prueba.Logica;
-using Prueba.Datos;
 
 //Logica donde estan los metodos que voy a utilizar
 //Formatear documento ctrl + e d
@@ -67,7 +67,7 @@ namespace Prueba.WebApi.Controllers
 
 
 
-        //Logica de producto
+        //Logica de Producto
         [Route("obtenerProductos")]
         [HttpPost]
         public IEnumerable<Producto> obtenerProductosCarrito()
@@ -213,7 +213,7 @@ namespace Prueba.WebApi.Controllers
 
 
 
-        
+
 
         //Logica de domicilio
         [Route("domicilio")]

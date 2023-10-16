@@ -1,11 +1,9 @@
-﻿using Prueba.Entidad;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using Prueba.Datos;
+using Prueba.Entidad;
+using Prueba.Logica;
+using System;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using System;
-using Prueba.Logica;
-using Prueba.Datos;
 
 namespace Prueba.WebApi.Controllers
 {
@@ -17,7 +15,7 @@ namespace Prueba.WebApi.Controllers
     //Options - Obtener metadatos para interactuar
 
     [EnableCors("*", "*", "*")]
-    [RoutePrefix("api/[controlador]")]
+    [RoutePrefix("api/Cliente")]
 
     //api/[controlador] llama al nombre del controlador de la misma clase en este caso LogicaCliente
     public class ClienteController : ApiController

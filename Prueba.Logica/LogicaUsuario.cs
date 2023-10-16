@@ -56,5 +56,20 @@ namespace Prueba.Logica
             }
         }
 
+        public void ActualizarUsuario(int idUsuario) {
+            try
+            {
+                using (var db = Conexion.TraerConexionDB())
+                {
+                    string cadena = "update Producto set idProducto=@idProducto, imagen=@imagen, titulo=@titulo precio=@precio, color=@color, cantidad=@cantidad, descripcion=@descripcion, idEmpresa=@idEmpresa, idCategoria=@idCategoria where idProducto=@oldid";
+                    //var result = db.Execute(cadena, new { producto.idProducto, producto.imagen, producto.titulo, producto.precio, producto.color, producto.cantidad, producto.descripcion, producto.idEmpresa, producto.idCategoria, oldid = producto.idProducto });
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
+
     }
 }

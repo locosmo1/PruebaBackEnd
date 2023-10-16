@@ -1,10 +1,5 @@
 ﻿using Prueba.Entidad;
 using Prueba.Logica;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -18,7 +13,7 @@ namespace Prueba.WebApi.Controllers
     //Options - Obtener metadatos para interactuar
 
     [EnableCors("*", "*", "*")]
-    [RoutePrefix("api/[controlador]")]
+    [RoutePrefix("api/Sesion")]
     public class SesionController : ApiController
     {
         LogicaSesion logicaSesion;
@@ -36,7 +31,7 @@ namespace Prueba.WebApi.Controllers
             logicaSesion.CerrarSesion();
         }
 
-        [Route("iniciarSesion")]
+        [Route("IniciarSesion")]
         [HttpPost]
         public int iniciarSesion([FromBody] UsuarioLogin usuario)
         {

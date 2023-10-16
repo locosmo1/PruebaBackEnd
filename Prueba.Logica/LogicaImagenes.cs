@@ -21,7 +21,7 @@ namespace Prueba.Logica
             listaImagenes.Add(imagen);
         }
 
-        public static void EnlazarImagenesProducto(int id_Producto)
+    public static void EnlazarImagenesProducto(int idProducto)
         {
             using (var db = Conexion.TraerConexionDB())
             {
@@ -39,7 +39,7 @@ namespace Prueba.Logica
 
                         string cadena = "insert into Imagen(idImagen, idProducto, direccion) values " +
                             "(@idImagen, @idProducto, @direccion)";
-                        var result = db.Execute(cadena, new { idImagen, id_Producto, imagen.direccion });
+                        var result = db.Execute(cadena, new { idImagen, idProducto, imagen.direccion });
 
                         //String sentencia22 = "SET IDENTITY_INSERT Imagen OFF";
                         //var resultado = db.Execute(sentencia22);

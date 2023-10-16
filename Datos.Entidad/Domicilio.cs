@@ -18,6 +18,17 @@ namespace Prueba.Entidad
             this.idUbicacion = idUbicacion;
         }
 
+        public Domicilio(int idDomicilio, String ciudad, String direccion, int idUsuario, int idUbicacion, string latitud, string longitud)
+        {
+            this.idDomicilio = idDomicilio;
+            this.ciudad = ciudad;
+            this.direccion = direccion;
+            this.idUsuario = idUsuario;
+            this.idUbicacion = idUbicacion;
+            this.latitud = latitud;
+            this.longitud = longitud;
+        }
+
         public int idDomicilio { get; set; }
         public String ciudad { get; set; }
         public String direccion { get; set; }

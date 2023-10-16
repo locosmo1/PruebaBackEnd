@@ -1,9 +1,6 @@
 ﻿using Prueba.Entidad;
 using Prueba.Logica;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -18,7 +15,7 @@ namespace Prueba.WebApi.Controllers
 
 
     [EnableCors("*", "*", "*")]
-    [RoutePrefix("api/[controlador]")]
+    [RoutePrefix("api/Carrito")]
 
     public class CarritoController : ApiController
     {
@@ -29,7 +26,7 @@ namespace Prueba.WebApi.Controllers
         }
 
 
-        [Route("agregarCarrito")]
+        [Route("AgregarCarrito")]
         [HttpPost]
         public void Post_Carrito([FromBody] Carrito carrito)
         {
@@ -37,19 +34,11 @@ namespace Prueba.WebApi.Controllers
         }
 
 
-        [Route("obtenerCarrito")]
+        [Route("ObtenerCarrito")]
         [HttpPost]
-        public IEnumerable<Carrito> obtenerCarrito()
+        public IEnumerable<Carrito> ObtenerCarrito()
         {
             return logicaCarrito.ObtenerCarrito();
-        }
-
-
-        [Route("obtenerCarrito")]
-        [HttpPost]
-        public IEnumerable<Carrito> obtenerCarrito(int id_Cliente)
-        {
-            return logicaCarrito.ObtenerCarrito(id_Cliente);
         }
 
     }

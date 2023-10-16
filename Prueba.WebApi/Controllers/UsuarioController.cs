@@ -1,10 +1,6 @@
 ﻿using Prueba.Entidad;
 using Prueba.Logica;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -18,18 +14,18 @@ namespace Prueba.WebApi.Controllers
     //Options - Obtener metadatos para interactuar
 
     [EnableCors("*", "*", "*")]
-    [RoutePrefix("api/[controlador]")]
+    [RoutePrefix("api/Usuario")]
     public class UsuarioController : ApiController
     {
         LogicaUsuario logicaUsuario;
 
-        public UsuarioController(LogicaUsuario logicaUsuario)
+        public UsuarioController()
         {
-            this.logicaUsuario = logicaUsuario;
+            this.logicaUsuario = new LogicaUsuario();
         }
 
         //Logica del Usuario
-        [Route("guardarUsuario")]
+        [Route("GuardarUsuario")]
         [HttpPost]
         public void Post_Usuario([FromBody] Usuario usuario)
         {
@@ -42,6 +38,20 @@ namespace Prueba.WebApi.Controllers
         public IEnumerable<Usuario> ObtenerUsuarios()
         {
             return logicaUsuario.ObtenerUsuarios();
+        }
+
+        [Route("ObtenerUsuarioActual")]
+        [HttpGet]
+        public Usuario ObtenerUsuarioActual()
+        {
+            return LogicaSesion.usuarioActual;
+        }
+
+        [Route("ActualizarUsuario")]
+        [HttpGet]
+        public void ActualizarUsuario(int idUsuario)
+        {
+            logicaUsuario.ActualizarUsuario(idUsuario);
         }
     }
 }

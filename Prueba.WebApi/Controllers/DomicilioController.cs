@@ -1,10 +1,6 @@
 ﻿using Prueba.Entidad;
 using Prueba.Logica;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -18,7 +14,7 @@ namespace Prueba.WebApi.Controllers
     //Options - Obtener metadatos para interactuar
 
     [EnableCors("*", "*", "*")]
-    [RoutePrefix("api/[controlador]")]
+    [RoutePrefix("api/Domicilio")]
     public class DomicilioController : ApiController
     {
 
@@ -28,13 +24,30 @@ namespace Prueba.WebApi.Controllers
             logicaDomicilio = new LogicaDomicilio();
         }
 
-        //Logica de domicilio
-        [Route("domicilio")]
+
         [HttpPost]
         public void Post_Domicilio([FromBody] Domicilio domicilio)
         {
             logicaDomicilio.GuardarDomicilio(domicilio);
         }
+
+        [Route("ObtenerIdUbicacion")]
+        [HttpPost]
+        public int ObtenerIdUbicacion([FromBody] int idDomicilio)
+        {
+            return logicaDomicilio.ObtenerIdUbicacion(idDomicilio);
+        }
+
+
+        //Logica de domicilio
+        [Route("crearDomicilio")]
+        [HttpPost]
+        public void CrearDomicilio([FromBody] Domicilio domicilio)
+        {
+            logicaDomicilio.GuardarDomiciliouUsuario(domicilio);
+        }
+
+
 
         [Route("ObtenerDomicilioUsuario")]
         [HttpPost]
@@ -42,5 +55,30 @@ namespace Prueba.WebApi.Controllers
         {
             return logicaDomicilio.ObtenerDomicilioUbicacionUsuario(idUsuario);
         }
+
+
+        [HttpPut]
+        public void ActualizarDomicilio([FromBody] Domicilio domicilio)
+        {
+            logicaDomicilio.ActualizarDomicilioId(domicilio);
+        }
+
+
+
+        [HttpDelete]
+        public void EliminarDomicilioUbicacion(int id)
+        {
+            logicaDomicilio.EliminarDomicilio(id);
+        }
+
+
+
+        [Route("EliminarDomicilioUbicacion")]
+        [HttpDelete]
+        public void EliminarDomicilioUbicacion(Domicilio domicilio)
+        {
+            logicaDomicilio.EliminarDomicilioUbicacion(domicilio);
+        }
+
     }
 }

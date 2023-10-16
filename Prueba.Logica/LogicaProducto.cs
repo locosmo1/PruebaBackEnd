@@ -27,9 +27,19 @@ namespace Prueba.Logica
                     idProducto = idProducto + 1;
 
                     //Obtener la empresa relacionada con el usuario
-                    int idUsuario = LogicaSesion.usuarioActual.idUsuario;
-                    String sentencia1 = "select idEmpresa from Empresa where idUsuario=@id";
-                    int idEmpresa = db.QueryFirstOrDefault<int>(sentencia1, new { id = idUsuario });
+                    int idEmpresa = 0;
+                    if (producto.idEmpresa==0)
+                    {
+                        int idUsuario = LogicaSesion.usuarioActual.idUsuario;
+                        String sentencia1 = "select idEmpresa from Empresa where idUsuario=@id";
+                        idEmpresa = db.QueryFirstOrDefault<int>(sentencia1, new { id = idUsuario });
+                    }
+                    else
+                    {
+                        int idUsuario = producto.idEmpresa;
+                        String sentencia1 = "select idEmpresa from Empresa where idUsuario=@id";
+                        idEmpresa = db.QueryFirstOrDefault<int>(sentencia1, new { id = idUsuario });
+                    }
 
                     //String sentencia11 = "SET IDENTITY_INSERT Producto ON";
                     //var resultados = db.Execute(sentencia11);
@@ -168,7 +178,7 @@ namespace Prueba.Logica
             {
                 using (var db = Conexion.TraerConexionDB())
                 {
-                    string cadena = "update Producto set idProducto=@idProducto, imagen=@imagen, titulo=@titulo precio=@precio, color=@color, cantidad=@cantidad, descripcion=@descripcion, idEmpresa=@idEmpresa, idCategoria=@idCategoria where idProducto=@oldid";
+                    string cadena = "update Producto set idProducto=@idProducto, imagen=@imagen, titulo=@titulo, precio=@precio, color=@color, cantidad=@cantidad, descripcion=@descripcion, idEmpresa=@idEmpresa, idCategoria=@idCategoria where idProducto=@oldid";
                     var result = db.Execute(cadena, new { producto.idProducto, producto.imagen, producto.titulo, producto.precio, producto.color, producto.cantidad, producto.descripcion, producto.idEmpresa, producto.idCategoria, oldid = producto.idProducto });
                 }
             }

@@ -1,10 +1,6 @@
 ﻿using Prueba.Entidad;
 using Prueba.Logica;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -37,13 +33,6 @@ namespace Prueba.WebApi.Controllers
             return logicaProducto.ListarDapper();
         }
 
-
-        [HttpGet]
-        public Producto ObtenerProducto([FromBody] int id)
-        {
-            return logicaProducto.ObtenerProducto(id);
-        }
-
         [HttpGet]
         [Route("{idEmpresa}")]
         public IEnumerable<Producto> ObtenerProductoEmpresa(int idEmpresa) //[FromBody] 
@@ -52,11 +41,26 @@ namespace Prueba.WebApi.Controllers
         }
 
 
+        [Route("ObtenerProductos")]
+        [HttpPost]
+        public IEnumerable<Producto> obtenerProductosCarrito()
+        {
+            return logicaProducto.ObtenerProductosCarrito();
+        }
+
         [HttpPost]
         public void NuevoProducto([FromBody] Producto producto)
         {
             logicaProducto.CrearProducto(producto);
         }
+
+        [Route("ObtenerProducto")]
+        [HttpPost]
+        public Producto PostProduct([FromBody] int id)
+        {
+            return logicaProducto.ObtenerProducto(id);
+        }
+
 
 
         [HttpPut]
@@ -66,10 +70,24 @@ namespace Prueba.WebApi.Controllers
         }
 
 
+
         [HttpDelete]
         public void EliminarProducto([FromBody] int idProducto)
         {
             logicaProducto.EliminarProducto(idProducto);
         }
+
+        [HttpDelete]
+        [Route("{idProducto}")]
+        public void EliminarProductoId([FromBody] int idProducto)
+        {
+            logicaProducto.EliminarProducto(idProducto);
+        }
+
+        //[HttpGet]
+        //public Producto ObtenerProducto([FromBody] int id)
+        //{
+        //    return logicaProducto.ObtenerProducto(id);
+        //}
     }
 }

@@ -16,12 +16,23 @@ namespace Prueba.Logica
         {
             using (var dB = Conexion.TraerConexionDB())
             {
-                int id_Carrito;
+                int idCarrito;
                 try
                 {
-                    String sentencia = "SELECT MAX(idCarrito) FROM Carrito";
-                    id_Carrito = dB.QueryFirstOrDefault<int>(sentencia);
-                    id_Carrito = id_Carrito + 1;
+                    string sentencianueva = "SELECT COUNT(idCarrito) from Carrito";
+                    int elementos = dB.QueryFirstOrDefault<int>(sentencianueva);
+
+                    int EncontrarIdCarrito()
+                    {
+                        String sentencia = "SELECT MAX(idCarrito) FROM Carrito";
+                        idCarrito = dB.QueryFirstOrDefault<int>(sentencia);
+                        idCarrito = idCarrito + 1;
+                        return idCarrito;
+                    }
+
+                    idCarrito = elementos > 0 ?
+                        EncontrarIdCarrito() :
+                        idCarrito = 1;
 
                     //String sentencia1 = "SET IDENTITY_INSERT Carrito ON";
                     //var resultados = dB.Execute(sentencia1);
@@ -32,10 +43,11 @@ namespace Prueba.Logica
                     int idCliente = dB.QueryFirstOrDefault<int>(sentencia1, new { id = idUsuario });
 
                     String sentencia2 = "insert into Carrito(idCarrito, cantidad, idProducto, idCliente) values (@idCarrito, @cantidad, @idProducto, @idCliente)";
-                    var result = dB.Execute(sentencia2, new { id_Carrito, carrito.cantidad, carrito.idProducto, idCliente });
+                    var result = dB.Execute(sentencia2, new { idCarrito, carrito.cantidad, carrito.idProducto, idCliente });
 
                     //String sentencia3 = "SET IDENTITY_INSERT Carrito OFF";
                     //var resultado = dB.Execute(sentencia3);
+
                 }
                 catch (SqlException ex)
                 {
